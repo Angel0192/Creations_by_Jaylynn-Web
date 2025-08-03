@@ -1,8 +1,8 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import Navbar from "./components/navbar";
-import Tile from "./components/productTile";
+import Navbar from "../components/navbar";
+import Tile from "../components/productTile";
 
-export default function Index() {
+export default function MainPage() {
   return (
     <View style={styles.container}>
       <Navbar/>
@@ -14,7 +14,7 @@ export default function Index() {
         {/* Logo Section */}
         <View style={styles.top}>
           <Image 
-            source={require("../assets/images/logo.png")} 
+            source={require("../../assets/images/logo.png")} 
             style={styles.image}
           />
         </View>
@@ -48,7 +48,10 @@ export default function Index() {
 
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
           <Text style={styles.sectionTitle}>NEW ARRIVALS</Text>
-          <Text style={styles.sectionTitle}>Testing..</Text>
+
+          // Add a styles sheet for these buttons
+          <Text style={styles.sectionTitle}>(--</Text>
+            <Text style={styles.sectionTitle}>--)</Text>
         </View>
 
         <ScrollView 
@@ -91,8 +94,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 244,
+    height: 276,
     resizeMode: 'contain',
     borderWidth: 1,          
     borderColor: '#000',

@@ -7,13 +7,11 @@ const Navbar = () => {
   // Function to handle when a nav link is pressed
   const handleLinkPress = (linkName: string) => {
     console.log(`You clicked on ${linkName}`);
-    // Later you can add navigation here like: router.push('/shop')
   };
 
   // Function to handle icon button presses
   const handleIconPress = (iconName: string) => {
     console.log(`You clicked on ${iconName} icon`);
-    // Add icon-specific logic here
   };
 
   return (
