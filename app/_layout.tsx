@@ -1,20 +1,19 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
-import AboutScreen from './pages/AboutPage';
-import ContactScreen from './pages/ContactPage';
-import MainScreen from './pages/MainPage';
+import AboutPage from './screens/about';
+import ContactPage from './screens/contact';
+import MainPage from './screens/index';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function Layout() {
   return (
-
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={MainScreen} />
-        <Stack.Screen name="About" component={AboutScreen} />
-        <Stack.Screen name="Contact" component={ContactScreen} />
-      </Stack.Navigator>
     
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={MainPage} options={{title: "Home"}} />
+        <Stack.Screen name="About" component={AboutPage} options={{title: "About Me"}}/>
+        <Stack.Screen name="Contact" component={ContactPage} options={{title: "Contact Me"}}/>
+      </Stack.Navigator>
   );
 }

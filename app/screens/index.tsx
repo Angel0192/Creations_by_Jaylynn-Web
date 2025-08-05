@@ -49,9 +49,11 @@ export default function MainPage() {
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
           <Text style={styles.sectionTitle}>NEW ARRIVALS</Text>
 
-          // Add a styles sheet for these buttons
+          /* Add a styles sheet for these buttons */
           <Text style={styles.sectionTitle}>(--</Text>
             <Text style={styles.sectionTitle}>--)</Text>
+
+            
         </View>
 
         <ScrollView 
@@ -73,6 +75,7 @@ export default function MainPage() {
         <View style={styles.bottomPadding} />
       </ScrollView>
     </View>
+    
   );
 }
 

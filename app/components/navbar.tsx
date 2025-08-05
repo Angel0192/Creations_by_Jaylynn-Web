@@ -3,11 +3,27 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 // Import icons from Lucide React
 import { Heart, Search, ShoppingCart, User } from "lucide-react-native";
 
+import { useNavigation, useNavigationState } from '@react-navigation/native';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../types.js";
+
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>; // Pass through the screens dictionary used in types.tsx
+
 const Navbar = () => {
-  // Function to handle when a nav link is pressed
-  const handleLinkPress = (linkName: string) => {
-    console.log(`You clicked on ${linkName}`);
-  };
+  const navigation = useNavigation<NavigationProp>();
+
+  // Grab current route name from the navigation state
+  const currentRouteName = useNavigationState(state => {
+    // Defensive check for empty state
+    if (!state || !state.routes || state.index === undefined) return null;
+    return state.routes[state.index]?.name;
+  });
+
+  const getLinkStyle = (screenName: string) => [
+    styles.linkText,
+    currentRouteName === screenName && styles.activeLinkText,
+  ];
 
   // Function to handle icon button presses
   const handleIconPress = (iconName: string) => {
@@ -15,23 +31,24 @@ const Navbar = () => {
   };
 
   return (
+    
     <View style={styles.navbar}>
       {/* Left side - Navigation Links */}
       <View style={styles.navigationLinks}>
         
-        {/* SHOP Button */}
-        <Pressable onPress={() => handleLinkPress('SHOP')}>
-          <Text style={styles.linkText} selectable={false}>SHOP</Text>
+        {/* HOME Button */}
+        <Pressable onPress={() => navigation.navigate("Home")}>
+        <Text style={getLinkStyle('Home')}>HOME</Text>
         </Pressable>
 
         {/* ABOUT Button */}
-        <Pressable onPress={() => handleLinkPress('ABOUT')}>
-          <Text style={styles.linkText} selectable={false}>ABOUT</Text>
+        <Pressable onPress={() => navigation.navigate("About")}>
+        <Text style={getLinkStyle('About')}>ABOUT</Text>
         </Pressable>
 
         {/* CONTACT Button */}
-        <Pressable onPress={() => handleLinkPress('CONTACT')}>
-          <Text style={styles.linkText} selectable={false}>CONTACT</Text>
+        <Pressable onPress={() => navigation.navigate("Contact")}>
+        <Text style={getLinkStyle('Contact')}>CONTACT</Text>
         </Pressable>
 
       </View>
@@ -91,7 +108,9 @@ const styles = StyleSheet.create({
     alignItems: "center",       // Center items vertically
     zIndex: 5,                 // Make sure it stays on top
     elevation: 8,              // Android shadow
-    borderRadius: 8,           // Rounded corners
+    borderRadius: 6,           // Rounded corners
+    shadowColor: "gray",
+    shadowRadius: 8
   },
   
   // Container for navigation links (left side)
@@ -101,11 +120,17 @@ const styles = StyleSheet.create({
   
   // Style for each link text
   linkText: {
-    marginLeft: 20,            // Space between each link
+    marginLeft: 10,            // Space between each link
+    padding: 10,
     color: "black",            // Text color
     fontSize: 16,              // Text size
-    fontFamily: 'Inter_400Regular', // Font style
+    fontFamily: 'Inter_800Regular', // Font style
     userSelect: "none",
+  },
+
+  activeLinkText: {
+    fontWeight: 'bold',
+    fontFamily: 'Inter_900Regular', // Font style
   },
 
   // Container for icon buttons (right side)
